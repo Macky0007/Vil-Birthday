@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+@theme {
+  --font-display: "Great Vibes", cursive;
+  --font-body: "Cormorant Infant", serif;
+
+  --color-primary: #065f46;
+  --color-secondary: #34d399;
+  --color-accent: #b45309;
+  --color-background: #f0fdf4;
+  --color-foreground: #14532d;
+  --color-card: #ffffff;
+  --color-muted: #e7f5ec;
+  --color-muted-foreground: #47615a;
+  --color-border: #d1fae5;
+}
