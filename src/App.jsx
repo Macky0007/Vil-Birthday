@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { usePWA } from './hooks/usePWA';
@@ -17,7 +17,15 @@ export default function App() {
   const [step, setStep] = useState('greeting');
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
+  const scrollContainerRef = useRef(null);
   const currentIndex = STEPS.indexOf(step);
+
+  // Each step reuses the same scrollable container, so without this the
+  // next page can mount while still scrolled to wherever the previous
+  // page left off (showing its bottom instead of its top).
+  useEffect(() => {
+    scrollContainerRef.current?.scrollTo(0, 0);
+  }, [step]);
 
   const goNext = () => {
     const next = STEPS[currentIndex + 1];
@@ -47,6 +55,7 @@ export default function App() {
     return (
     <MotionConfig reducedMotion="user">
       <div
+        ref={scrollContainerRef}
         className={`fixed inset-0 overflow-x-hidden bg-background font-body text-foreground ${
         ['letter', 'message', 'memories'].includes(step) ? 'overflow-y-auto' : 'overflow-y-hidden'
       }`}
