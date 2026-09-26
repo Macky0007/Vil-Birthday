@@ -16,19 +16,31 @@ export default function FirstMessage({ onNext, onBack }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="flex min-h-dvh flex-col items-center justify-center px-6 py-16"
+      className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-6 py-16"
     >
+      {/* Ambient background glow — same treatment as FirstGreetings/LastGreeting */}
+      <motion.div
+        className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-secondary/30 blur-3xl"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
       <motion.div
         variants={staggerContainer}
         initial="initial"
         animate="animate"
         className="grid w-full max-w-4xl items-center gap-10 md:grid-cols-2 md:gap-14"
       >
-        <motion.div
-          variants={staggerItem}
-          className="mx-auto h-72 w-56 overflow-hidden rounded-[2rem] border-4 border-card shadow-xl sm:h-80 sm:w-64 md:mx-0"
-        >
-          <img src={heroImage} alt="A photo of us" className="h-full w-full object-cover" />
+        <motion.div variants={staggerItem} className="mx-auto md:mx-0">
+          <img
+            src={heroImage}
+            alt="A photo of us"
+            className="h-96 w-auto -rotate-3 rounded-[2rem] border-4 border-card shadow-xl sm:h-[30rem]"
+          />
         </motion.div>
 
         <motion.div variants={staggerItem} className="flex flex-col gap-5 text-left">

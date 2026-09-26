@@ -56,8 +56,19 @@ export default function Memories({ onNext, onBack }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="flex min-h-dvh flex-col items-center justify-center gap-8 px-6 py-16"
+      className="relative flex min-h-dvh flex-col items-center justify-center gap-8 overflow-x-hidden px-6 py-16"
     >
+      {/* Ambient background glow — same treatment as FirstGreetings/LastGreeting */}
+      <motion.div
+        className="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-secondary/30 blur-3xl"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="pointer-events-none absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,7 +112,7 @@ export default function Memories({ onNext, onBack }) {
           transition={{ duration: 0.35, ease: 'easeInOut' }}
           className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-xl"
         >
-          <div className="flex h-56 w-full items-center justify-center overflow-hidden rounded-xl bg-muted sm:h-64">
+          <div className="flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-muted">
             {active.image ? (
               <img src={active.image} alt={active.label} className="h-full w-full object-cover" />
             ) : (

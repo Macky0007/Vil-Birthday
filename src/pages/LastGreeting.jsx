@@ -6,7 +6,7 @@ import { pageVariants, pageTransition } from '../animations/pageTransition';
 
 // Placeholder — tell me the real closing message and I'll drop it in.
 const CLOSING_TITLE = 'Happy Birthday, Vil!';
-const FINAL_MESSAGE = `(placeholder — this is where your final birthday message goes once you send it to me)`;
+const FINAL_MESSAGE = `Here's to more memories with you, and more random moments together. I really appreciate you and everything you've done for me, and I'm really glad I got the chance to know you. Happy birthday! ❤️`;
 
 // Optional elapsed-time line. Leave this null until you give me the real date —
 // e.g. RELATIONSHIP_START_DATE = '2023-06-15'. While it's null, that line just doesn't render.

@@ -31,6 +31,11 @@ export default function Letter({ onNext }) {
     if (!isOpen) setIsOpen(true);
   };
 
+  const skipTyping = () => {
+    clearInterval(intervalRef.current);
+    setTypedCount(LETTER_MESSAGE.length);
+  };
+
   useEffect(() => {
     if (!letterVisible) return;
 
@@ -56,8 +61,19 @@ export default function Letter({ onNext }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="flex min-h-dvh flex-col items-center justify-center gap-8 px-6 py-12 text-center"
+      className="relative flex min-h-dvh flex-col items-center justify-center gap-8 overflow-x-hidden px-6 py-12 text-center"
     >
+      {/* Ambient background glow — same treatment as FirstGreetings/LastGreeting */}
+      <motion.div
+        className="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-secondary/30 blur-3xl"
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="pointer-events-none absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
       <AnimatePresence mode="wait">
         {!isOpen ? (
           <motion.div
@@ -119,7 +135,7 @@ export default function Letter({ onNext }) {
             >
               A Letter for You
             </motion.h1>
-            <motion.div
+                        <motion.div
               key="letter"
               initial={{ opacity: 0, y: 30, scale: 0.85 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -132,6 +148,19 @@ export default function Letter({ onNext }) {
                 {!isTypingDone && <span className="animate-pulse">|</span>}
               </p>
             </motion.div>
+
+            {!isTypingDone && (
+              <motion.button
+                type="button"
+                onClick={skipTyping}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="font-body text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              >
+                Skip
+              </motion.button>
+            )}
           </>
         )}
       </AnimatePresence>

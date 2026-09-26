@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { AnimatePresence, MotionConfig } from 'framer-motion';
+import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { usePWA } from './hooks/usePWA';
+import bgMusic from './assets/bg-music.mp3';
 import FirstGreetings from './pages/FirstGreetings';
 import Letter from './pages/Letter';
 import FirstMessage from './pages/FirstMessage';
@@ -13,6 +15,8 @@ export default function App() {
   usePWA(); // keeps the service-worker registration running in the background
 
   const [step, setStep] = useState('greeting');
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef(null);
   const currentIndex = STEPS.indexOf(step);
 
   const goNext = () => {
@@ -20,16 +24,54 @@ export default function App() {
     if (next) setStep(next);
   };
 
+  const startMusic = () => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = 0.4; // 0 (silent) to 1 (full) — tune to taste
+    audioRef.current.play().catch(() => {
+      // Would only land here if autoplay got blocked anyway — shouldn't
+      // happen since this only ever runs from a real click.
+    });
+  };
+
+  const toggleMute = () => {
+    if (!audioRef.current) return;
+    audioRef.current.muted = !audioRef.current.muted;
+    setIsMuted(audioRef.current.muted);
+  };
+
   const goBack = () => {
     const prev = STEPS[currentIndex - 1];
     if (prev) setStep(prev);
   };
 
-  return (
+    return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-dvh bg-background font-body text-foreground">
+      <div
+        className={`h-dvh overflow-x-hidden bg-background font-body text-foreground ${
+          step === 'letter' ? 'overflow-y-auto' : 'overflow-y-hidden'
+        }`}
+      >
+        <audio ref={audioRef} src={bgMusic} loop />
+
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={isMuted ? 'Unmute background music' : 'Mute background music'}
+          className="fixed right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-card/80 text-foreground shadow-md backdrop-blur transition-transform hover:scale-105"
+        >
+          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+        </button>
+
         <AnimatePresence mode="wait">
-          {step === 'greeting' && <FirstGreetings key="greeting" onNext={goNext} />}
+          {step === 'greeting' && (
+            <FirstGreetings
+              key="greeting"
+              onNext={() => {
+                startMusic();
+                goNext();
+              }}
+            />
+          )}
           {step === 'letter' && <Letter key="letter" onNext={goNext} onBack={goBack} />}
           {step === 'message' && <FirstMessage key="message" onNext={goNext} onBack={goBack} />}
           {step === 'memories' && <Memories key="memories" onNext={goNext} onBack={goBack} />}
