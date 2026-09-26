@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaHeart } from 'react-icons/fa';
 import { pageVariants, pageTransition } from '../animations/pageTransition';
-import heroImage from '../assets/hero.png';
+import heroImage from '../assets/hero.jpg';
 
 // Swap these two for the real thing whenever you're ready — see notes below.
-const RECIPIENT_NAME = 'Love';
+const RECIPIENT_NAME = 'Vil';
 const OPENING_LINE = "I made you something. It's not much, but every bit of it is real.";
 
 const containerVariants = {
@@ -27,7 +27,7 @@ export default function FirstGreetings({ onNext }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
+      className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-6 text-center"
     >
       {/* Decorative glows — visual only, don't intercept clicks */}
       <motion.div
@@ -51,7 +51,7 @@ export default function FirstGreetings({ onNext }) {
           variants={itemVariants}
           className="font-body text-sm uppercase tracking-[0.3em] text-muted-foreground"
         >
-          A little something for
+          A little something for you
         </motion.p>
 
         <motion.h1
