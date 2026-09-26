@@ -13,5 +13,11 @@
   --color-card: #ffffff;
   --color-muted: #e7f5ec;
   --color-muted-foreground: #47615a;
-  --color-border: #d1fae5;
+   --color-border: #d1fae5;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }

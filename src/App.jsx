@@ -47,7 +47,7 @@ export default function App() {
     return (
     <MotionConfig reducedMotion="user">
       <div
-        className={`h-dvh overflow-x-hidden bg-background font-body text-foreground ${
+        className={`fixed inset-0 overflow-x-hidden bg-background font-body text-foreground ${
           step === 'letter' ? 'overflow-y-auto' : 'overflow-y-hidden'
         }`}
       >

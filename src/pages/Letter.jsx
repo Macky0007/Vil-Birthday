@@ -63,17 +63,6 @@ export default function Letter({ onNext }) {
       transition={pageTransition}
       className="relative flex min-h-dvh flex-col items-center justify-center gap-8 overflow-x-hidden px-6 py-12 text-center"
     >
-      {/* Ambient background glow — same treatment as FirstGreetings/LastGreeting */}
-      <motion.div
-        className="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-secondary/30 blur-3xl"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="pointer-events-none absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      />
       <AnimatePresence mode="wait">
         {!isOpen ? (
           <motion.div
