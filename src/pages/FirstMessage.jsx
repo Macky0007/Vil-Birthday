@@ -16,7 +16,7 @@ export default function FirstMessage({ onNext, onBack }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden px-6 py-16"
+      className="relative flex min-h-dvh flex-col items-center justify-start md:justify-center overflow-x-hidden px-6 py-16"
     >
       <motion.div
         variants={staggerContainer}

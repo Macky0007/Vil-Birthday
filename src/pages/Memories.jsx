@@ -56,7 +56,7 @@ export default function Memories({ onNext, onBack }) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="relative flex min-h-dvh flex-col items-center justify-center gap-8 overflow-x-hidden px-6 py-16"
+      className="relative flex min-h-dvh flex-col items-center justify-start md:justify-center gap-8 overflow-x-hidden px-6 py-16"
     >
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
