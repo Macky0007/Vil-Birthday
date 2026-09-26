@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { pageVariants, pageTransition } from '../animations/pageTransition';
 import { staggerContainer, staggerItem } from '../animations/stagger';
-import heroImage from '../assets/firstMessage.jpg';
+import first from '../assets/firstMessage.jpg';
 
 // Placeholder paragraphs — swap these out once you give me the real message.
 const MESSAGE_PARAGRAPHS = [
@@ -37,7 +37,7 @@ export default function FirstMessage({ onNext, onBack }) {
       >
         <motion.div variants={staggerItem} className="mx-auto md:mx-0">
           <img
-            src={heroImage}
+            src={first}
             alt="A photo of us"
             className="h-96 w-auto -rotate-3 rounded-[2rem] border-4 border-card shadow-xl sm:h-[30rem]"
           />
