@@ -48,8 +48,8 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <div
         className={`fixed inset-0 overflow-x-hidden bg-background font-body text-foreground ${
-          step === 'letter' ? 'overflow-y-auto' : 'overflow-y-hidden'
-        }`}
+        ['letter', 'message', 'memories'].includes(step) ? 'overflow-y-auto' : 'overflow-y-hidden'
+      }`}
       >
         <audio ref={audioRef} src={bgMusic} loop />
 
